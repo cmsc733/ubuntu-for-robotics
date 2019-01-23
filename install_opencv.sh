@@ -1,7 +1,7 @@
 #!/bin/bash
 
-version="$(wget -q -O - http://sourceforge.net/projects/opencvlibrary/files/opencv-unix | egrep -m1 -o '\"[0-9](\.[0-9]+)+' | cut -c2-)"
-version=3.4
+# version="$(wget -q -O - http://sourceforge.net/projects/opencvlibrary/files/opencv-unix | egrep -m1 -o '\"[0-9](\.[0-9]+)+' | cut -c2-)"
+version=3.4.0
 echo "Installing OpenCV: " $version
 echo " in" $PWD
 echo "Tested only on Ubuntu-16.04. It might not work with any other distro."
@@ -25,7 +25,8 @@ cd build
 
 maxThreads=$(grep -c ^processor /proc/cpuinfo)
 echo Enter the number of CPU threads you want to use. FYI: You have $maxThreads CPU Threads.
-read nThreads
+# read nThreads
+nThreads=maxThreads
 
 cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=OFF -D WITH_OPENGL=ON ..
 # or try for cuda support:
